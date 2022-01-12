@@ -7,3 +7,47 @@
 body {
     background-color: #666666;
 }
+.container {
+  max-width: 1230px;
+  margin: 0 auto;
+  padding: 15px;
+}
+.content__body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.item {
+  max-width: 200px;
+  margin: 5px;
+  border: 1px solid #888;
+  flex: 1 0 25%;
+}
+.item__img {
+  margin: 5px;
+  width: 100%;
+}
+.phone-photo {
+  width: 100%;
+  object-fit: cover;
+}
+.item__description-img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.item__description {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item__price {
+  font-weight: 700;
+}
+.item__title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}

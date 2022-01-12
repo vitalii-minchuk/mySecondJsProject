@@ -1,7 +1,8 @@
 
+//-------------------------------random arrey-----------------------------------
 function makeItems() {
 
-    const makes = ['Apple', 'Huawei', 'Motorola', 'Nokia', 'Samsung', 'ZTE', 'Xiaomi'];
+    const makes = ['Apple', 'Huawei', 'ASUS', 'Sony', 'Alcatel', 'Motorola', 'Nokia', 'Samsung', 'ZTE', 'Xiaomi'];
     const price = getRandomPrice(1000, 30000);;
     const freeDelivery =[false, true];
 
@@ -23,10 +24,21 @@ function makeItems() {
     };
     return item;
 }
-let iter = 5;
-i = 0;
-while (i < iter) {
-    makeItems();
-    console.log(makeItems());
-    i++;
+const allThePhones = [];
+
+let theNumberOfPhones = 50;
+k = 0;
+while (k < theNumberOfPhones) {
+  allThePhones.push(makeItems());
+  k++;
 }
+
+console.log(allThePhones);
+
+//------------------------------pagination------------------------------------
+
+
+
+
+
+
