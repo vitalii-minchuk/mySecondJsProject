@@ -27,15 +27,60 @@ function makeItems() {
 const allThePhones = [];
 
 let theNumberOfPhones = 50;
-k = 0;
-while (k < theNumberOfPhones) {
+
+while (theNumberOfPhones) {
   allThePhones.push(makeItems());
-  k++;
+  theNumberOfPhones--;
+}
+//------------------------------pagination------------------------------------
+
+const pages = document.getElementById('page-btns');
+const list = document.getElementById('wrapper');
+
+let currentPage = 1;
+let numberOfItemsOnThePage = 5;
+
+function ShowList(items, wrapper, itemsPerPage, page) {
+  wrapper.innerHTML = '';
+  page--;
+
+  let start = itemsPerPage * page;
+  let end = start + itemsPerPage
+  let slicedItems = items.slice(start, end);
+  
+  for (i = 0; i < slicedItems.length; i++) {
+
+    let elem = document.createElement('div');
+    elem.setAttribute('class', 'item');
+
+    let elem2 = document.createElement('div');
+    elem2.setAttribute('class', 'item__title');
+    elem2.innerHTML = 'hello';
+
+    let elem1 = document.createElement('div');
+    elem1.setAttribute('class', 'item__img');
+
+    let elem1Img = document.createElement('img');
+    elem1Img.setAttribute('class', 'phone-photo');
+    elem1Img.setAttribute('src', './img/smartphone-iphone-pngrepo-com.png');
+
+    elem1.appendChild(elem1Img);
+    elem.appendChild(elem1);
+    elem.appendChild(elem2);
+
+    console.log(elem)
+    list.appendChild(elem);
+    console.log(list)
+
+  }
 }
 
-console.log(allThePhones);
+// function createNewItem(text, )
 
-//------------------------------pagination------------------------------------
+ShowList(allThePhones, list, numberOfItemsOnThePage, currentPage);
+
+
+
 
 
 

@@ -14,7 +14,7 @@ body {
 }
 .content__body {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -22,7 +22,7 @@ body {
   max-width: 200px;
   margin: 5px;
   border: 1px solid #888;
-  flex: 1 0 25%;
+  box-shadow: 3px 3px 5px #999999;
 }
 .item__img {
   margin: 5px;
