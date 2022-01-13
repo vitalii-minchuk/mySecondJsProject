@@ -51,3 +51,25 @@ body {
   font-weight: 700;
   text-align: center;
 }
+.content__pages {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.content__pages-btn {
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  margin: 2px;
+  background-color: #999999;
+  border: 1px solid #111;
+  text-align: center;
+}
+.content__pages-btn.active {
+  background-color: #999999;
+  border: 1px solid #f00d0d;
+}
+.content__pages-btn:hover {
+  background-color: #777;
+}
