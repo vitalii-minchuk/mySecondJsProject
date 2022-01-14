@@ -25,7 +25,7 @@ body {
   box-shadow: 3px 3px 5px #999999;
 }
 .item__img {
-  margin: 5px;
+  padding: 5px;
   width: 100%;
 }
 .phone-photo {
@@ -42,6 +42,12 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.item__description-img {
+  transition: all 0.5s;
+}
+.item__description-img:hover {
+  transform: scale(1.2);
 }
 .item__price {
   font-weight: 700;
@@ -67,9 +73,97 @@ body {
   text-align: center;
 }
 .content__pages-btn.active {
-  background-color: #999999;
-  border: 1px solid #f00d0d;
+  background-color: #222;
+  border: 1px solid #fff;
+  color: #fff;
 }
 .content__pages-btn:hover {
   background-color: #777;
 }
+/* ---------------------------top+cart--------------------------------- */
+.top {
+  display: flex;
+  justify-content: end;
+  margin: 20px 0;
+}
+.cart__btn {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+.cart__open {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: all 0.3s;
+}
+.cart__open:hover {
+  transform: scale(1.2);
+}
+.cart__img {
+  width: 100%;
+  object-fit: cover;
+}
+.cart__price {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 0 5px;
+}
+.cart__popup {
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+  background-color: #202020;
+  width: 300px;
+  height: 500px;
+  color: #f0f0f0;
+  z-index: 5;
+  position: fixed;
+  top: 20px;
+  right: 0;
+  text-align: center;
+  animation: fade 0.5s;
+}
+.cart__popup-close {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  transition: all 0.3s;
+}
+.cart__popup-close:hover {
+  transform: scale(1.1);
+}
+@keyframes fade {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: none;
+  }
+}
+.hide {
+  display: none;
+  visibility: none;
+}
+.cart__popup-overlay {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.5);
+}
+.scrolling {
+  height: 100vh;
+  overflow: hidden;
+}
+
+

@@ -136,6 +136,24 @@ function createNewPage (page) {
 ShowList(allThePhones, list, numberOfItemsOnThePage, currentPage);
 ShowPages(allThePhones, pages, numberOfItemsOnThePage);
 
-//------------------------------
+//------------------------------popup+cart------------------------
 
+const openShopCart = document.querySelector('.cart__open');
+const popUp = document.querySelector('.cart__popup');
+const closeShopCart = document.querySelector('.cart__popup-close');
+const overlay = document.querySelector('.cart__popup-overlay');
+const hideScrolling = document.querySelector('body')
+
+openShopCart.addEventListener('click', () => {
+  popUp.classList.toggle('hide');
+  hideScrolling.classList.toggle('scrolling');
+})
+
+closeShopCart.addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
+
+function closeCart() {
+  popUp.classList.toggle('hide');
+  hideScrolling.classList.toggle('scrolling');
+}
 
