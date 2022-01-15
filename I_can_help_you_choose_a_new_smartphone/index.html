@@ -8,8 +8,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+  <div class="container">
+    <div class="top">
+      <div class="search">
+        <div class="search__window">
+          <div class="search__input-panel">
+            <input class="search__input" id="search__input" type="text" placeholder="Search">
+            <div class="search__options"></div>
+          </div>
+          <button class="search__btn" id="search-btn-ok">
+            <img class="search__btn-img" src="./img/search.png" alt="search sign">
+          </button>
+        </div>
+      </div>
+      <div class="cart">
+        <div class="cart__btn">
+          <div class="cart__open">
+            <img class="cart__img" src="./img/cart.png" alt="cart">
+          </div>
+          <div class="cart__price">
+            <p id="sum-prices"></p>
+          </div>
+        </div>
+        <div class="cart__popup hide">
+          <div class="cart__popup-close">&#10005;</div>
+          <div class="cart__popup-content"></div>
+          <div class="cart__popup-overlay"></div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content__body" id="wrapper">
+      </div>
+      <div class="content__pages" id="page-btns">
+        
+      </div>
+    </div>
+  </div>  
 
-    <script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
