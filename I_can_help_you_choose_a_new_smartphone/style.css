@@ -246,11 +246,37 @@ body {
 .search__btn-img:hover {
   transform: scale(1.2);
 }
-.serch__input {
+.search__input-panel {
+  position: relative;
+}
+.search__input {
+  outline-style: none;
   font-size: 18px;
   height: 30px;
   padding: 3px;
-  background-color: transparent;
+  background-color: #999999;
   border: 1px solid #111;
   outline-style: none;
+  box-shadow: 3px 3px 5px #111;
 }
+.search__options {
+  border: 1px solid #111;
+  border-top: none;
+  width: 100%;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background-color: #999999;
+  box-shadow: 3px 3px 5px #111;
+}
+.search__options >* {
+  font-size: 18px;
+  display: block;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+.search__options >*:hover {
+  background-color: #666666;
+}
+
+

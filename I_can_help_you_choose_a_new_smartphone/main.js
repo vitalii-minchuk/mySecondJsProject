@@ -297,35 +297,62 @@ parentElement.addEventListener('click', (e) => {
 updateShoppingCartHTML() 
 
 
-// console.log(productToCart)
-// console.log(products)
-
 //-----------------------------------------------------
 
-// ======?????????????????????fshaj djfgkasks===============
 
-
-
-const inputWindow = document.querySelector('#serch__input');
+const inputWindow = document.querySelector('#search__input');
+const parentInput = document.querySelector('.search__options');
 const searchBtn = document.querySelector('.search__btn');
-console.log(allThePhones)
 
-inputWindow.oninput = function() {
-  const inputVal = inputWindow.value;
-  const list = allThePhones;
+inputWindow.addEventListener('input', () => {
 
-  let result = list.map(product => {
-    return product['make']
+  const inputValue = inputWindow.value.trim();
+ 
+  parentInput.innerHTML = '';
+
+  const options = allThePhones.filter((option) => {
+    return option.make.toLowerCase().startsWith(inputValue.toLowerCase());
+
   })
 
-  console.log(5)
-  console.log(inputVal)
-  console.log(list[0]['make'])
-  console.log(result)
-  result
+  options.forEach(option => {
+    const optionDiv = document.createElement('div')
+    optionDiv.innerHTML = option.make;
+    optionDiv.setAttribute('class', 'search__option')
+    parentInput.appendChild(optionDiv)
+  })
 
-}
+  if (inputValue == '') {
+    parentInput.innerHTML = '';
+  }
+
+  console.log(options)
+
+});
+
+document.addEventListener('click', (event) => {
+  if (event.target.className === 'search__option') {
+    inputWindow.value = event.target.innerHTML;
+    parentInput.innerHTML = '';
+   } 
+})
+
+let filteredGoods = [];
+
+searchBtn.addEventListener('click', () => {
+  console.log(22)
+  for (i = 0; i < allThePhones.length; i++) {
+    // console.log(allThePhones[i]['make'])
+    // console.log(inputWindow.value)
+
+    if (allThePhones[i]['make'] == inputWindow.value) {
+      filteredGoods.push(allThePhones[i]);
+    }
+
+
+    
+    // console.log(filteredGoods)
+  }
+})
 console.log(allThePhones)
-console.log()
-
 
