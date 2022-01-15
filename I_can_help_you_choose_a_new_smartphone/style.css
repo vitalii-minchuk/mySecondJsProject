@@ -83,7 +83,8 @@ body {
 /* ---------------------------top+cart--------------------------------- */
 .top {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
+  align-items: center;
   margin: 20px 0;
 }
 .cart__btn {
@@ -221,4 +222,35 @@ body {
 .cart__popup-goods-description-btn-plus:hover {
   background-color: #666666;
 }
-
+/* ---------------------search----------------------------- */
+.search__window {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 3px;
+}
+.search__btn {
+  margin-left: 10px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 30px;
+  cursor: pointer;
+  outline-style: none;
+}
+.search__btn-img {
+  width: 100%;
+  object-fit: cover;
+  transition: all 0.3s;
+}
+.search__btn-img:hover {
+  transform: scale(1.2);
+}
+.serch__input {
+  font-size: 18px;
+  height: 30px;
+  padding: 3px;
+  background-color: transparent;
+  border: 1px solid #111;
+  outline-style: none;
+}

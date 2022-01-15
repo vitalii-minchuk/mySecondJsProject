@@ -31,7 +31,7 @@ function createID() {
 
 const allThePhones = [];
 
-let theNumberOfPhones = 200;
+let theNumberOfPhones = 40;
 
 while (theNumberOfPhones) {
   allThePhones.push(makeItems());
@@ -43,7 +43,7 @@ const pages = document.getElementById('page-btns');
 const list = document.getElementById('wrapper');
 
 let currentPage = 1;
-let numberOfItemsOnThePage = 10;
+let numberOfItemsOnThePage = 9;
 
 function ShowList(items, wrapper, itemsPerPage, page) {
   wrapper.innerHTML = '';
@@ -169,7 +169,10 @@ function closeCart() {
   hideScrolling.classList.toggle('scrolling');
 }
 
-let productsInCart = [];
+let productsInCart = JSON.parse(localStorage.getItem('cart'));
+  if(!productsInCart) {
+    productsInCart = [];
+  }
 
 const parentElement = document.querySelector('.cart__popup-content');
 const cartSumPrice = document.getElementById('sum-prices');
@@ -214,6 +217,7 @@ function updateProductsInCart(product) {
 }
 
 function updateShoppingCartHTML() {
+  localStorage.setItem('cart', JSON.stringify(productsInCart));
   if (productsInCart.length > 0) {
 		let result = productsInCart.map(product => {
 			return `
@@ -299,3 +303,29 @@ updateShoppingCartHTML()
 //-----------------------------------------------------
 
 // ======?????????????????????fshaj djfgkasks===============
+
+
+
+const inputWindow = document.querySelector('#serch__input');
+const searchBtn = document.querySelector('.search__btn');
+console.log(allThePhones)
+
+inputWindow.oninput = function() {
+  const inputVal = inputWindow.value;
+  const list = allThePhones;
+
+  let result = list.map(product => {
+    return product['make']
+  })
+
+  console.log(5)
+  console.log(inputVal)
+  console.log(list[0]['make'])
+  console.log(result)
+  result
+
+}
+console.log(allThePhones)
+console.log()
+
+
