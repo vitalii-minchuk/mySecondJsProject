@@ -2,31 +2,36 @@
 //-------------------------------random arrey-----------------------------------
 function makeItems() {
 
-    const makes = ['Apple', 'Huawei', 'ASUS', 'Sony', 'Alcatel', 'Motorola', 'Nokia', 'Samsung', 'ZTE', 'Xiaomi'];
-    const price = getRandomPrice(1000, 30000);;
-    const freeDelivery =[false, true];
+  const makes = ['Apple', 'Huawei', 'ASUS', 'Sony', 'Alcatel', 'Motorola', 'Nokia', 'Samsung', 'ZTE', 'Xiaomi'];
+  const price = getRandomPrice(1000, 30000);;
+  const freeDelivery =[false, true];
 
-    let randomMakes = Math.floor(Math.random() * makes.length);
-    let randomDelivery = Math.floor( Math.random() * 2);
+  let randomMakes = Math.floor(Math.random() * makes.length);
+  let randomDelivery = Math.floor( Math.random() * 2);
 
-    function getRandomPrice(min, max) {
+  function getRandomPrice(min, max) {
 
-        let num = Math.random() * (max - min) + min;
-
-            beautifullNum = Math.trunc(num / 100) * 100;
+    let num = Math.random() * (max - min) + min;
+    beautifullNum = Math.trunc(num / 100) * 100;
     return beautifullNum;
-    }
+  }
 
-    let item = {
-        make: makes[randomMakes],
-        price,
-        'free delivery': freeDelivery[randomDelivery],
-    };
-    return item;
+  let item = {
+    make: makes[randomMakes],
+    price,
+    'free delivery': freeDelivery[randomDelivery],
+    ID: createID(),
+  };
+  return item;
 }
+let ID = 1;
+function createID() {
+  return ID++;
+}
+
 const allThePhones = [];
 
-let theNumberOfPhones = 100;
+let theNumberOfPhones = 200;
 
 while (theNumberOfPhones) {
   allThePhones.push(makeItems());
@@ -53,7 +58,6 @@ function ShowList(items, wrapper, itemsPerPage, page) {
     let obj = slicedItems[i];
 
     createNewItem(obj);
-
   }
 }
 
@@ -78,7 +82,7 @@ function createNewItem(obj) {
   elem3.setAttribute('class', 'item__description');
   let elem3Price = document.createElement('div');
   elem3Price.setAttribute('class', 'item__price');
-   elem3.innerHTML = obj.price;
+  elem3Price.innerHTML = obj.price;
 
   let elem3Delivery = document.createElement('div');
   elem3Delivery.setAttribute('class', 'item__spec-offer');
@@ -89,6 +93,9 @@ function createNewItem(obj) {
 
   let elem3Cart = document.createElement('div');
   elem3Cart.setAttribute('class', 'item__cart');
+
+  elem3Cart.setAttribute('id', `${obj.ID}`);
+
   let elem3CartImg =  document.createElement('img');
   elem3CartImg.setAttribute('class', 'item__description-img');
   elem3CartImg.setAttribute('src', './img/cart.png');
@@ -123,12 +130,17 @@ function createNewPage (page) {
     pageBtn.classList.add('active');
   }
   pageBtn.addEventListener('click', () => {
+    
     console.log('hello')
+    
     currentPage = page;
     ShowList(allThePhones, list, numberOfItemsOnThePage, currentPage);
     let currentBtn = document.querySelector('.content__pages-btn.active');
     currentBtn.classList.remove('active');
     pageBtn.classList.add('active');
+
+    addProduct();
+    
   })
   return pageBtn;
 }
@@ -157,3 +169,133 @@ function closeCart() {
   hideScrolling.classList.toggle('scrolling');
 }
 
+let productsInCart = [];
+
+const parentElement = document.querySelector('.cart__popup-content');
+const cartSumPrice = document.getElementById('sum-prices');
+
+addProduct();
+
+function addProduct() {
+  const products = document.querySelectorAll('.item');
+products.forEach(product => {
+  product.addEventListener('click', () => {
+    const productName = product.querySelector('.item__title').innerHTML;
+    const productPrice = product.querySelector('.item__price').innerHTML;
+    const productImg = product.querySelector('.phone-photo').src;
+    const productId = product.querySelector('.item__cart').id;
+
+    let productToCart = {
+      name: productName,
+      id: productId,
+      img: productImg,
+      price: +productPrice,
+      count: 1,
+      basePrice: +productPrice,
+    }
+
+    updateProductsInCart(productToCart);
+    updateShoppingCartHTML();
+  })
+})
+
+}
+
+function updateProductsInCart(product) {
+  for (i = 0; i < productsInCart.length; i++) {
+    if (productsInCart[i].id == product.id) {
+
+      productsInCart[i].count++;
+			productsInCart[i].price = productsInCart[i].basePrice * productsInCart[i].count;
+			return;
+    }
+  }
+  productsInCart.push(product);
+}
+
+function updateShoppingCartHTML() {
+  if (productsInCart.length > 0) {
+		let result = productsInCart.map(product => {
+			return `
+				<div class="cart__popup-goods">
+					<div class="cart__popup-goods-photo" >
+            <img class="cart__popup-goods-img" src="${product.img}" alt="phone">
+          </div>
+					<div class="cart__popup-goods-description">
+						<div class="cart__popup-goods-description-title">${product.name}</div>
+						<div class="cart__popup-goods-description-price">${product.price}</div>
+						<div class="cart__popup-goods-description-btns">
+							<button class="cart__popup-goods-description-btn-plus" data-id=${product.id}>-</button>
+							<span class="cart__popup-goods-description-count">${product.count}</span>
+							<button class="cart__popup-goods-description-btn-minus" data-id=${product.id}>+</button>
+						</div>
+					</div>
+				</div>`
+		});
+
+		parentElement.innerHTML = result.join('');
+    cartSumPrice.innerHTML = `${sumPrice()}`;
+    console.log('way')
+
+	} else {
+    parentElement.innerHTML = '<div class="cart__popup-content-empty">Your cart is empty</div>';
+    cartSumPrice.innerHTML = '';
+  }
+}
+
+function sumPrice() {
+  let sum = 0;
+  productsInCart.forEach(product => {
+    sum += +product.price;
+  })
+  return sum;
+}
+
+parentElement.addEventListener('click', (e) => {
+
+	const plus = e.target.classList.contains('cart__popup-goods-description-btn-plus');
+	const minus = e.target.classList.contains('cart__popup-goods-description-btn-minus');
+
+  if (plus) {
+    for (let i = 0; i < productsInCart.length; i++) {
+      if (productsInCart[i].id == e.target.dataset.id) {
+        if (plus) {
+        	productsInCart[i].count--;
+        }
+        	productsInCart[i].price = productsInCart[i].basePrice * productsInCart[i].count;
+          console.log(productsInCart[i].price);
+      
+        }
+        if (productsInCart[i].count <= 0) {
+          productsInCart.splice(i, 1);
+          
+        }
+
+        updateShoppingCartHTML()
+
+      }
+  } else if (!minus){
+    console.log('3')
+  } else {
+    for (let i = 0; i < productsInCart.length; i++) {
+      if (productsInCart[i].id == e.target.dataset.id) {
+        productsInCart[i].count++;
+        productsInCart[i].price = productsInCart[i].basePrice * productsInCart[i].count;
+        console.log(productsInCart[i].price);
+      }
+    }
+  }
+
+  updateShoppingCartHTML()
+
+})
+
+updateShoppingCartHTML() 
+
+
+// console.log(productToCart)
+// console.log(products)
+
+//-----------------------------------------------------
+
+// ======?????????????????????fshaj djfgkasks===============
